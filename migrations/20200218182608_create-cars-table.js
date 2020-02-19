@@ -1,26 +1,27 @@
 
-exports.up = function(knex) {
+exports.up = function(knex, Promise) {
 //    the change we want to make to our schema
     return knex.schema.createTable('cars', tbl => {
         tbl.increments(); // auto increments and increases 
         tbl
         .string('VIN', 17)
         .notNullable()
-        .index()
+        .unique()
+        .index();
         
         tbl
         .string('Make', 128)
-        .notNullable()
+        .notNullable();
         
         
         tbl
         .string('Model', 128)
         .notNullable()
-        .index()
+        .index();
 
         tbl
-        .string('Milage', 9)
-        .notNullable()
+        .string('Mileage', 6)
+        .notNullable();
         
 
         tbl.string('Trans', 128)
@@ -28,7 +29,7 @@ exports.up = function(knex) {
     });
 };
 
-exports.down = function(knex) {
+exports.down = function(knex, Promise ) {
 //   undoing that change 
-    return knenx.schema.dropTableIfExists('cars');
+    return knex.schema.dropTableIfExists('cars');
 };
